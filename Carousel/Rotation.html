@@ -1,0 +1,211 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Up and Down Carousel</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    #div1 {
+      width: 1300px;
+      height: 650px;
+      margin: 60px auto;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #div1 ul {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    #div1 ul li {
+      height: 650px;
+      float: left;
+    }
+
+    #div1 ol {
+      position: absolute;
+      bottom: 40%;
+      box-shadow: 5px;
+    }
+
+    #div1 ol li {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: #fff;
+      margin-top: 10px;
+      line-height: 20px;
+      text-align: center;
+
+    }
+
+    #div1 ol li.ac {
+      background: lightskyblue;
+      color: #fff;
+    }
+
+    #div1>a {
+      text-decoration: none;
+      position: absolute;
+      left: 50%;
+      height: 40px;
+      line-height: 32px;
+      text-align: center;
+      width: 40px;
+      font-size: 40px;
+      vertical-align: middle;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 6;
+    }
+
+    #div1 .goUp {
+      top: 0;
+    }
+
+    #div1 .goDown {
+      bottom: 0;
+    }
+
+    img {
+      width: 1300px;
+      height: 650px;
+    }
+  </style>
+  <script src="./utils.js"></script>
+</head>
+
+<body>
+  <div id="div1">
+    <ul>
+      <li><img src="./a.jpg" /></li>
+      <li><img src="./b.jpg" /></li>
+      <li><img src="./c.jpg" /></li>
+      <li><img src="./d.jpg" /></li>
+      <li><img src="./e.jpg" /></li>
+    </ul>
+    <ol>
+    </ol>
+    <a href="javascript:;" class="goUp">&uarr;</a>
+    <a href="javascript:;" class="goDown">&darr;</a>
+  </div>
+  <script>
+    class Rotation {
+      constructor(selector) {
+        // 查找需要用到的元素
+        this.container = document.querySelector(selector)
+        this.ul = this.container.querySelector('ul')
+        this.imgs = this.ul.querySelectorAll('li')
+        this.ol = this.container.querySelector('ol')
+        this.goUp = this.container.querySelector('.goUp')
+        this.goDown = this.container.querySelector('.goDown')
+
+
+        // 获取追加之前图片的长度
+        this.len = this.imgs.length
+        // 获取图片的高度
+        this.height = this.imgs[0].offsetHeight
+        // 创建数组放和图片数量一样的随机生成的按钮过来
+        this.btns = []
+        // 记录上一次索引和这一次的索引
+        this.lastIndex = 0
+        this.index = 0
+        // 记录当前轮播图状态，默认false为静止，true为正在轮播
+        this.isMove = false
+
+        this.add()
+        this.btnsChange()
+        this.downChange()
+        this.upChange()
+        this.auto()
+      }
+      // 封装btns函数方便调用
+      changeBtn() {
+        this.btns[this.lastIndex].classList = ''
+        this.btns[this.index].classList = 'ac'
+      }
+      // 追加图片
+      add() {
+        this.ul.appendChild(this.imgs[0].cloneNode(true))
+        this.ul.style.height = this.height * (this.len + 1) + 'px'
+        for (var i = 0; i < this.len; i++) {
+          var li = document.createElement('li')
+          li.className = i === 0 ? 'ac' : ''
+          this.ol.appendChild(li)
+          this.btns.push(li)
+        }
+      }
+      // 按钮切换
+      btnsChange() {
+        this.btns.forEach((btn, i) => {
+          btn.onclick = () => {
+            this.lastIndex = this.index
+            this.index = i
+            utils.move1(this.ul, 'top', -this.index * this.height)
+            this.changeBtn()
+          }
+        })
+      }
+      // 向下切换
+      downChange() {
+        this.goDown.onclick = () => {
+          if (!this.isMove) {
+            this.isMove = true
+            this.lastIndex = this.index
+            this.index++
+            if (this.index === this.len) {
+              this.index = 0
+              utils.move1(this.ul, 'top', -this.len * this.height, () => {
+                this.ul.style.top = '0px'
+                this.isMove = false
+              })
+            } else {
+              utils.move1(this.ul, 'top', -this.index * this.height, () => {
+                // 运动结束之后直接返回false
+                this.isMove = false
+              })
+            }
+          }
+          this.changeBtn()
+        }
+      }
+      // 向上切换
+      upChange() {
+        this.goUp.onclick = () => {
+          this.lastIndex = this.index
+          this.index--
+          if (this.index < 0) {
+            // 让index赋值为len-1
+            // 让ul瞬间拉到len的位置，然后往len-1移动
+            this.index = this.len - 1
+            this.ul.style.top = -this.len * this.height + 'px'
+          }
+          utils.move1(this.ul, 'top', -this.index * this.height)
+          this.changeBtn()
+        }
+      }
+      // 自动轮播
+      auto() {
+        const _this = this
+        this.container.onmouseenter = () => {
+          clearInterval(this.container.timer)
+        }
+        this.container.onmouseleave = (function play() {
+          _this.container.timer = setInterval(_this.goDown.onclick, 2000)
+          return play // 立即执行函数要return这个函数
+        })()
+      }
+    }
+    new Rotation('#div1')
+  </script>
+</body>
+
+</html>

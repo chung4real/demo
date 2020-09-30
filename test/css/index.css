@@ -1,0 +1,25 @@
+.btn-add {
+  margin-bottom: 30px;
+}
+
+.table-shop input,
+.table-shop .btn-ok,
+.table-shop .btn-cancel {
+  display: none;
+}
+
+.edit span,
+.edit .btn-edit,
+.edit .btn-del {
+  display: none;
+}
+
+.edit input,
+.edit .btn-ok,
+.edit .btn-cancel {
+  display: inline-block;
+}
+
+.table-shop {
+  table-layout: fixed;
+}

@@ -27,5 +27,5 @@ utils.on($btnAdd, 'click', function () {
 })
 // 添加之后清除添加框的输入值
 $('#addModal').on('hidden.bs.modal', function () {
-  inputName.value = inputPrice.value = inputNum.value = ''
+  inputName.val() = inputPrice.val() = inputNum.val() = ''
 })

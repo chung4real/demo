@@ -5,7 +5,7 @@ const tbody = document.querySelector('#tbody-shop')
 getData()
 function getData() {
   // 向后端发送请求
-  utils.fetch('./api/shop/select.php').then(resp => {
+  $.get('./api/shop/select.php', resp => {
     if (resp.code === 200) {
       const { list } = resp.body
       tbody.innerHTML = list.reduce((html, shop, index) => {

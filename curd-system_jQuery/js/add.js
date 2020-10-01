@@ -1,31 +1,38 @@
 // 添加数据并且渲染到页面上
-const $btnAdd = $('#btn-add'),
-      $addFail = $('#addFail'),
-      $inputNum = $('#inputNum'),
-      $inputName = $('#inputName'),
-      inputPrice = $('#inputPrice')
+const $inputNum = $('#inputNum'),
+  $inputName = $('#inputName'),
+  $inputPrice = $('#inputPrice'),
+  $addFail = $('#addFail')
 // 给添加按钮写点击事件
-utils.on($btnAdd, 'click', function () {
-  const name = inputName.val(),
-        num = inputNum.val(),
-        price = inputPrice.val()
-  // 向后端发送接口请求
-  utils.fetch('./api/shop/add.php', { name, price, num }).then(resp => {
+// $('#btn-add').on('click', function () {
+//   const name = $inputName.val(),
+//     num = $inputNum.val(),
+//     price = $inputPrice.val()
+//   // 向后端发送接口请求
+//   $.get('./api/shop/add.php', { name, price, num }),
+//     function (resp) {
+//       if (resp.code === 200) {
+
+//       }
+//     }
+// })
+$('#btn-add').on('click', function () {
+  const name = $inputName.val(),
+    price = $inputPrice.val(),
+    num = $inputNum.val()
+  $.get('./api/shop/add.php', { name, price, num }, function (resp) {
     if (resp.code === 200) {
-      setTimeout(() => {
-        // 让模态框隐藏并且重新渲染
-        $('#addModal').modal('hide')
-        getData()
-      }, 200)
+      $('#addModal').modal('hide')
+      getData()
     } else {
-      addFail.classList.remove('edit')
+      $addFail.removeClass('hide')
       setTimeout(() => {
-        addFail.classList.add('edit')
+        $addFail.addClass('hide')
       }, 2000)
     }
-  })
+  }, 'json')
 })
 // 添加之后清除添加框的输入值
 $('#addModal').on('hidden.bs.modal', function () {
-  inputName.val() = inputPrice.val() = inputNum.val() = ''
+  inputName.value = inputPrice.value = inputNum.value = ''
 })

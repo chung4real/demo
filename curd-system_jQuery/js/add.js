@@ -4,18 +4,6 @@ const $inputNum = $('#inputNum'),
   $inputPrice = $('#inputPrice'),
   $addFail = $('#addFail')
 // 给添加按钮写点击事件
-// $('#btn-add').on('click', function () {
-//   const name = $inputName.val(),
-//     num = $inputNum.val(),
-//     price = $inputPrice.val()
-//   // 向后端发送接口请求
-//   $.get('./api/shop/add.php', { name, price, num }),
-//     function (resp) {
-//       if (resp.code === 200) {
-
-//       }
-//     }
-// })
 $('#btn-add').on('click', function () {
   const name = $inputName.val(),
     price = $inputPrice.val(),

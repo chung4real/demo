@@ -1,21 +1,16 @@
-// 添加数据并且渲染到页面上
-const $inputNum = $('#inputNum'),
-  $inputName = $('#inputName'),
-  $inputPrice = $('#inputPrice'),
-  $addFail = $('#addFail')
 // 给添加按钮写点击事件
 $('#btn-add').on('click', function () {
-  const name = $inputName.val(),
-    price = $inputPrice.val(),
-    num = $inputNum.val()
+  const name = $('#inputNum').val(),
+    price = $('#inputName').val(),
+    num = $('#inputPrice').val()
   $.get('./api/shop/add.php', { name, price, num }, function (resp) {
     if (resp.code === 200) {
       $('#addModal').modal('hide')
       getData()
     } else {
-      $addFail.removeClass('hide')
+      $('#addFail').removeClass('hide')
       setTimeout(() => {
-        $addFail.addClass('hide')
+        $('#addFail').addClass('hide')
       }, 2000)
     }
   }, 'json')

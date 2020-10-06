@@ -9,21 +9,14 @@
   <link rel="stylesheet" href="./css/index.css">
   <script src="./libs/jquery-3.5.1.min.js"></script>
   <script src="./libs/bootstrap/js/bootstrap.min.js"></script>
-  <!-- <script src="./js/utils.js"></script> -->
+  <script src="./js/utils.js"></script>
 </head>
 
 <body>
+  <!-- 导航栏 -->
   <nav class="navbar navbar-inverse">
     <div class="container">
-      <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-          data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
         <a class="navbar-brand" href="#">Fancy car</a>
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -32,16 +25,21 @@
           <li class="active"><a href="#">首页</a></li>
           <li><a href="#">其他页面</a></li>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">登录</a></li>
-          <li><a href="#">注册</a></li>
+        <!-- 登录 注册 -->
+        <ul class="nav navbar-nav navbar-right" id="un-login">
+          <li><a href="./html/login.html">登录</a></li>
+          <li><a href="./html/register.html">注册</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right hide" id="is-login">
+          <li><a href="#">欢迎您,<b></b></a></li>
+          <li><a href="#" id="logout">退出登录</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
   <!-- 表格居中 -->
   <div class="container">
-    <button class="btn btn-primary btn-add"  data-toggle="modal" data-target="#addModal">添加车型</button>
+    <button class="btn btn-primary btn-add" data-toggle="modal" data-target="#addModal">添加车型</button>
     <table class="table table-shop table-bordered table-hover table-condensed table-striped">
       <thead>
         <tr>
@@ -111,6 +109,7 @@
   <script src="./js/select.js"></script>
   <script src="./js/add.js"></script>
   <script src="./js/curd.js"></script>
+  <script src="./js/verifyLogin.js"></script>
 </body>
 
 </html>

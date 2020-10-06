@@ -2,7 +2,7 @@
 
 const tbody = document.querySelector('#tbody-shop')
 
-getData()
+// getData()
 function getData() {
   // 向后端发送请求
   $.get('./api/shop/select.php', resp => {

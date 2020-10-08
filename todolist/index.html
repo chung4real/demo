@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>ToDoList</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<!-- 头部 -->
+	<div class="header">
+		<div class="form">
+			<label for="title">ToDoList</label>
+			<input type="text" id="title" placeholder="添加待办" required="required" autocomplete="off" />
+		</div>
+	</div>
+	<!-- 内容 -->
+	<div class="content">
+		<div class="doing">
+			<h2>
+				待办
+				<span id="todocount">0</span>
+			</h2>
+			<ol id="todolist"></ol>
+		</div>
+		<div class="done">
+			<h2>
+				完成事项
+				<span id="donecount">0</span>
+			</h2>
+			<ol id="donelist"></ol>
+		</div>
+	</div>
+	<!-- 底部 -->
+	<div class="footer">
+		Copyright 2011 - 2020 1000phone. All Rights Reserved
+	</div>
+	<canvas id="drawing" width="600" height="400"></canvas>
+	<script type="text/javascript" src="index.js"></script>
+</body>
+
+</html>

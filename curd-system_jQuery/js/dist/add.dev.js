@@ -2,9 +2,9 @@
 
 // 给添加按钮写点击事件
 $('#btn-add').on('click', function () {
-  var name = $('#inputNum').val(),
-      price = $('#inputName').val(),
-      num = $('#inputPrice').val();
+  var name = $('#inputName').val(),
+      price = $('#inputPrice').val(),
+      num = $('#inputNum').val();
   $.get('./api/shop/add.php', {
     name: name,
     price: price,

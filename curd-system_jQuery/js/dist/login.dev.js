@@ -3,7 +3,7 @@
 $('.login').on('click', function (e) {
   var $name = $('#nameInput').val(),
       $pwd = $('#pwdInput').val();
-  var check = document.querySelector('#check');
+  var $check = $('#check');
   $.ajax({
     url: '../api/user/login.php',
     method: 'post',
@@ -13,7 +13,7 @@ $('.login').on('click', function (e) {
     },
     success: function success(resp) {
       if (resp.code === 200) {
-        if (check.checked) {
+        if ($check.prop('checked')) {
           utils.setCookie('username', $name, {
             expires: 7,
             path: '/'
